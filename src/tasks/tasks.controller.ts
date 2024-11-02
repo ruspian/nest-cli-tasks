@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { CreateTaskDto } from './dtos/create-tasks.dto';
 import { TasksService } from './tasks.service';
 
@@ -24,7 +31,11 @@ export class TasksController {
   @Get('/:id')
 
   //   menggunakan dekorator @Param('id') untuk mengambil id
-  getTask(@Param('id') id: string) {
-    return this.tasksService.findOne(parseInt(id));
+  async getTask(@Param('id') id: string) {
+    const tasks = await this.tasksService.findOne(parseInt(id));
+
+    if (!tasks) {
+      throw new NotFoundException('Data Tidak Ditemukan!');
+    }
   }
 }
