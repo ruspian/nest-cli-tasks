@@ -11,11 +11,7 @@ import { TasksService } from './tasks.service';
 
 @Controller('tasks')
 export class TasksController {
-  tasksService: TasksService;
-
-  constructor() {
-    this.tasksService = new TasksService();
-  }
+  constructor(public tasksService: TasksService) {}
 
   @Get()
   listTasks() {
@@ -37,5 +33,7 @@ export class TasksController {
     if (!tasks) {
       throw new NotFoundException('Data Tidak Ditemukan!');
     }
+
+    return tasks;
   }
 }
