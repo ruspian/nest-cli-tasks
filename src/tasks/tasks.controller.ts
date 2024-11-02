@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 @Controller('tasks')
 export class TasksController {
@@ -8,12 +8,15 @@ export class TasksController {
   }
 
   @Post()
-  createTask() {
-    return 'ini adalah halaman create tasks dengan metod POST';
+  //   menggunakan dekorator @Body untuk mengambil data inputaan dari body/user
+  createTask(@Body() body: any) {
+    return body;
   }
 
   @Get('/:id')
-  getTask() {
-    return 'ini adalah halaman id dari tasks';
+
+  //   menggunakan dekorator @Param('id') untuk mengambil id
+  getTask(@Param('id') id: string) {
+    return `ini adalah task dengan id: ${id}`;
   }
 }
