@@ -7,7 +7,7 @@ import { TasksModule } from './tasks/tasks.module';
 async function bootstrap() {
   const app = await NestFactory.create(TasksModule);
 
-  // menambahkan validasi dengan decorator pipe / pipe adalah validasi
+  // menambahkan validasi global dengan pipe / pipe adalah validasi
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(process.env.PORT ?? 3000);
 }

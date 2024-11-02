@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CreateTaskDto } from './dtos/create-tasks.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -9,7 +10,7 @@ export class TasksController {
 
   @Post()
   //   menggunakan dekorator @Body untuk mengambil data inputaan dari body/user
-  createTask(@Body() body: any) {
+  createTask(@Body() body: CreateTaskDto) {
     return body;
   }
 
